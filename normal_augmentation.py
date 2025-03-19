@@ -3,54 +3,32 @@ import albumentations as A
 import os 
 
 # Define input and output paths 
-input_folder = r'D:\Capstone\image_augmentation\code\Tuberculosis' 
+input_folder = r'D:\Capstone\image_augmentation\code\normal' 
 output_folder = input_folder  # Save in the same folder 
 
 # Ensure output directory exists 
 os.makedirs(output_folder, exist_ok=True) 
 
-# Define 10 augmentation pipelines
+# Define 5 augmentation pipelines
 augmentations = [ 
     A.Compose([ 
         A.Rotate(limit=5, p=1), 
-        A.RandomBrightnessContrast(brightness_limit=0.1, contrast_limit=0, p=1), 
-        A.GaussianBlur(blur_limit=3, p=1)
+        A.GaussianBlur(blur_limit=3, p=1) 
     ]), 
     A.Compose([ 
         A.Affine(shear=5, p=1),   
         A.Affine(scale=(1.1, 1.1), p=1) 
     ]), 
     A.Compose([ 
-        A.Affine(scale=(0.9, 0.9), p=1), 
-        A.GaussianBlur(blur_limit=3, p=1)
-    ]), 
-    A.Compose([ 
-        A.Rotate(limit=-5, p=1), 
-        A.RandomBrightnessContrast(brightness_limit=0, contrast_limit=0.2, p=1) 
-    ]), 
-    A.Compose([ 
-        A.RandomBrightnessContrast(brightness_limit=-0.1, contrast_limit=-0.2, p=1) 
-    ]), 
-    A.Compose([ 
-        A.Affine(shear=5, p=1),   
-        A.Rotate(limit=5, p=1) 
-    ]), 
-    A.Compose([ 
-        A.Affine(scale=(1.1, 1.1), p=1), 
-        A.RandomBrightnessContrast(brightness_limit=0.1, contrast_limit=0, p=1) 
+        A.RandomBrightnessContrast(brightness_limit=0.1, contrast_limit=0.2, p=1) 
     ]), 
     A.Compose([ 
         A.Affine(scale=(0.9, 0.9), p=1), 
         A.RandomBrightnessContrast(brightness_limit=0, contrast_limit=0.2, p=1) 
-    ]), 
-    A.Compose([ 
-        A.Rotate(limit=5, p=1), 
-        A.GaussianBlur(blur_limit=3, p=1)
     ]), 
     A.Compose([ 
         A.Affine(shear=5, p=1),  
-        A.RandomBrightnessContrast(brightness_limit=0.1, contrast_limit=0, p=1), 
-        A.GaussianBlur(blur_limit=3, p=1)
+        A.GaussianBlur(blur_limit=3, p=1) 
     ]) 
 ] 
 
