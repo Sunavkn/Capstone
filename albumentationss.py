@@ -1,21 +1,14 @@
 import cv2 
 import albumentations as A 
 import os 
- 
+
 # Define input and output paths 
-input_path = r'D:\\Capstone\\image_augmentation\\code\\xray.jpg' 
-output_folder = r'D:\\Capstone\\image_augmentation\\output' 
- 
+input_folder = r'D:\Capstone\image_augmentation\code\Tuberculosis' 
+output_folder = input_folder  # Save in the same folder 
+
 # Ensure output directory exists 
 os.makedirs(output_folder, exist_ok=True) 
- 
-# Load the input chest X-ray image 
-image = cv2.imread(input_path) 
- 
-if image is None: 
-    print(f"Error: Could not load {input_path}. Check if the file exists.") 
-    exit() 
- 
+
 # Define 10 augmentation pipelines
 augmentations = [ 
     A.Compose([ 
@@ -60,11 +53,21 @@ augmentations = [
         A.GaussianBlur(blur_limit=3, p=1)
     ]) 
 ] 
- 
-# Apply each augmentation pipeline and save the result 
-for i, aug in enumerate(augmentations, 1): 
-    augmented = aug(image=image)['image'] 
-    output_path = os.path.join(output_folder, f'augmented_albumentations_{i}.jpg') 
-    cv2.imwrite(output_path, augmented) 
- 
-print(f"✅ 10 augmented images have been saved in '{output_folder}'.")
+
+# Process each image in the folder
+for filename in os.listdir(input_folder):
+    input_path = os.path.join(input_folder, filename)
+    image = cv2.imread(input_path) 
+    
+    if image is None: 
+        print(f"Error: Could not load {input_path}. Skipping.") 
+        continue 
+    
+    # Apply each augmentation pipeline and save the result 
+    name, ext = os.path.splitext(filename)
+    for i, aug in enumerate(augmentations, 1): 
+        augmented = aug(image=image)['image'] 
+        output_path = os.path.join(output_folder, f'{name}.{i}{ext}') 
+        cv2.imwrite(output_path, augmented) 
+
+print(f"✅ Augmented images have been saved in '{output_folder}'.")
