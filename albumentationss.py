@@ -3,8 +3,8 @@ import albumentations as A
 import os 
 
 # Define input and output paths 
-input_folder = r'D:\Capstone\image_augmentation\code\Tuberculosis' 
-output_folder = input_folder  # Save in the same folder 
+input_folder = r'C:\Users\jayan\SEM 6\Capstone\TB_Chest_Radiography_Database\Tuberculosis' 
+output_folder = input_folder
 
 # Ensure output directory exists 
 os.makedirs(output_folder, exist_ok=True) 

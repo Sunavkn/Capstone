@@ -3,8 +3,8 @@ import albumentations as A
 import os 
 
 # Define input and output paths 
-input_folder = r'D:\Capstone\image_augmentation\code\normal' 
-output_folder = input_folder  # Save in the same folder 
+input_folder = r'C:\Users\jayan\SEM 6\Capstone\TB_Chest_Radiography_Database\Normal' 
+output_folder = input_folder  
 
 # Ensure output directory exists 
 os.makedirs(output_folder, exist_ok=True) 
@@ -14,7 +14,7 @@ augmentations = [
     A.Compose([ 
         A.Rotate(limit=5, p=1), 
         A.GaussianBlur(blur_limit=3, p=1) 
-    ]), 
+    ]),
     A.Compose([ 
         A.Affine(shear=5, p=1),   
         A.Affine(scale=(1.1, 1.1), p=1) 
